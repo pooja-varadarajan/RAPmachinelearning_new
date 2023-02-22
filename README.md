@@ -1,6 +1,6 @@
 
 # Digit_Recognition_Web_App
- link : https://maneprajakta.github.io/Digit_Recognition_Web_App/
+ link : https://RAPmachinelearning.github.io/Digit_Recognition_Web_App/
 <br>
 <h3>Structure of App</h3>
 <h2> keras - > Tensorflow.js ->(html + css + javascript)->github pages</h1>
