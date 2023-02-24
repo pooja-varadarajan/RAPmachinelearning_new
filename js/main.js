@@ -212,6 +212,7 @@ function displayLabel(data) {
         max = data[i];        
       }
     }
+document.getElementById('result1').innerHTML = maxIndex;
 document.getElementById('result').innerHTML = maxIndex;  
 document.getElementById('confidence').innerHTML = "Confidence: "+(max*100).toFixed(2) + "%";
 }
