@@ -40,10 +40,18 @@
     <p>Click on the "Choose File" button to upload a file:</p>
  
 
-<form onload="myFunction()">
-  <input type="file" id="myFile" name="filename">
-  <input type="submit">
-</form>
+<button id="myBtn">Submit</button>
+
+<p id="demo">
+
+<script>
+const element = document.getElementById("myBtn");
+element.addEventListener("click", myFunction);
+
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Predicted answer:0";
+}
+</script>
   </section>
 
   <section id="content">
