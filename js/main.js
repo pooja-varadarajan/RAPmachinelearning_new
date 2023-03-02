@@ -2,23 +2,17 @@ var canvas,ctx;
 var mouseX,mouseY,mouseDown=0;
 var touchX,touchY;
 
-// fucnction for interacting with canvas
+
 
 function init()
 {
     canvas = document.getElementById('sketchpad');
-    //'2d' means two dimensional rendering context on canvas
+    
     ctx = canvas.getContext('2d');
-    //we have context of canvas on ctx
-    //we will fill ctx background with black
     ctx.fillStyle = "black";
-    // it draws a fill rect with x=0,y=0 as start 
-    //and canvas width and height
     ctx.fillRect(0,0,canvas.width,canvas.height);
     if(ctx)
     {
-        //if mousedown than call function 
-        //sketchPad_mouseDown.false means bubble phase
         canvas.addEventListener('mousedown', sketchpad_mouseDown, false);          
         canvas.addEventListener('mousemove', sketchpad_mouseMove, false);          
         window.addEventListener('mouseup', sketchpad_mouseUp, false);           
@@ -27,50 +21,39 @@ function init()
     }
 }
 
-//now to enable drawing on canvas we define draw function
+
 function draw(ctx,x,y,size,isDown)
 {
     if(isDown)
-    {   //to inform canvas user is about to draw
+    {   
         ctx.beginPath();
-        //to set color of line
-        ctx.strokeStyle = "white";
-        //set width of line      
-        ctx.lineWidth = '15'; 
-        //.linejoin : set connection between two line 
-        //lineCap to set end of line      
-        ctx.lineJoin = ctx.lineCap = 'round';   
-        //it tells where to start drawing line  
+        ctx.strokeStyle = "white";    
+        ctx.lineWidth = '15';   
+        ctx.lineJoin = ctx.lineCap = 'round';    
         ctx.moveTo(lastX, lastY);      
-        //draw line from start to current position of pointer
-        ctx.lineTo(x,y);
-        //drawing is complete      
-        ctx.closePath();   
-        //to paint the line drawn with some pixel   
+        ctx.lineTo(x,y);   
+        ctx.closePath();    
         ctx.stroke();    
     }   
-   //if not mousedown than start posi is curr position  
+  
   lastX = x; 
   lastY = y; 
 }
 
 
-//Event handlers
 
-//when mouse is down it will call draw function
+
 function sketchpad_mouseDown() {
     mouseDown=1;    
     draw(ctx,mouseX,mouseY,12, false );
 }
 
-//when mouse is released it set's mousedown back to false
+
 function sketchpad_mouseUp() {    
     mouseDown=0;
 }
 
-//it is activated when mouse is moved in either direction
-//it get's current position of mouse from getMousePos(e)
-//if mouseDown than call draw
+
 function sketchpad_mouseMove(e) {
     getMousePos(e);
     if (mouseDown==1) {
@@ -78,11 +61,7 @@ function sketchpad_mouseMove(e) {
     }
 }
 
-//it finds current position of pointer
-//when mouse event is triggered
-//offset x,offset y return x,y cordinate of mouse
-//layer x,layer y 
-//return horizantak and vertical cordinates relative to current layer
+
 function getMousePos(e) 
 {    
     if (!e)        
@@ -97,10 +76,7 @@ function getMousePos(e)
     } 
 }
 
-//touch event handler
-
-//it is activated when user touches the touchpad
-//it calls draw func with false to note position not to draw
+/
 function sketchpad_touchStart() {     
     getTouchPos();    
     draw(ctx,touchX,touchY,12, false);    
