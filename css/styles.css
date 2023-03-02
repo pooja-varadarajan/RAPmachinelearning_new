@@ -174,8 +174,5 @@ p{
   margin-top: 1%;
 }
 
-@media (min-width: 720px) {
-  .leftside{
-    padding-left: 10%;
-  }
+
 }
