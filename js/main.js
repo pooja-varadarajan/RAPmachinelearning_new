@@ -80,13 +80,11 @@ function getMousePos(e)
 function sketchpad_touchStart() {     
     getTouchPos();    
     draw(ctx,touchX,touchY,12, false);    
-    //this prevents scrolling of screen when user draws
     event.preventDefault();
 }
 
 
-//it is activated when user drags in sketchpad
-//it calls draw with true flag to enable drawing
+
 
 function sketchpad_touchMove(e) {     
     getTouchPos(e);    
@@ -94,15 +92,13 @@ function sketchpad_touchMove(e) {
     event.preventDefault();
 }
 
-//it is used to find point in the sketchpad where user has
-//touched
+
 
 function getTouchPos(e) {    
     if (!e)        
     var e = event;     
     if(e.touches) {   
-        //it length is used to find  
-        //how many fingers has touched    
+           
       if (e.touches.length == 1) {            
         var touch = e.touches[0];            
         touchX=touch.pageX-touch.target.offsetLeft;               
@@ -111,8 +107,7 @@ function getTouchPos(e) {
     }
 }
 
-//clearing the sketchpad
-//on click of clear button it fills backg with black color
+
 
 document.getElementById('clear_button').addEventListener("click",  
                                              function(){  
@@ -122,14 +117,6 @@ document.getElementById('clear_button').addEventListener("click",
 });
 
 
-//integrating  CANVAS  with CNN MODEL
-
-
-//loading the model
-
-//the base url of website in which our 
-//web app is deployed is obtained from window.location.origin
-//the json file is loaded using async function
 
 var base_url = window.location.origin;
 let model;
@@ -139,33 +126,17 @@ let model;
     console.log("model loaded..");
 })();
 
-//preprocessing model
 
-/*
-the digit sketched is passed as image to model
-so as to predict the value of it
-
-*/
 
 function preprocessCanvas(image) { 
    
-    //resizing the input image to target size of (1, 28, 28) 
-    //tf.browser.fromPixels() method, to create a tensor that will flow into the first layer of the model
-    //tf.image.resizeNearestNeighbor() function resizes a batch of 3D images to a new shape
-    //tf.mean() function is used to compute the mean of elements across the dimensions of the tensor
-    //tf.toFloat() function casts the array to type float
-    //The tensor.div() function is used to divide the array or tensor by the maximum RGB value(255)
+   
     let tensor = tf.browser.fromPixels(image).resizeNearestNeighbor([28, 28]).mean(2).expandDims(2).expandDims().toFloat(); 
     console.log(tensor.shape); 
     return tensor.div(255.0);
 }
 
-//Prediction
-//canvas.toDataURL() : returns 
-//image in format specified default png
-//than send to preprocess function
-//await makes program wait until mmodel prediction
-//displayLabel to display result
+
 document.getElementById('predict_button').addEventListener("click",async function(){     
     var imageData = canvas.toDataURL();    
     let tensor = preprocessCanvas(canvas); 
@@ -178,7 +149,7 @@ document.getElementById('predict_button').addEventListener("click",async functio
 });
 
 
-//output
+
 function displayLabel(data) { 
     var max = data[0];    
     var maxIndex = 0;     
